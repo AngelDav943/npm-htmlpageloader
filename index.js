@@ -1,2 +1,5 @@
-let text = "hello world!"
-console.log(text)
+module.exports = {
+    test(something) {
+        return "Hello, this is a test. ::"+something
+    }
+}
