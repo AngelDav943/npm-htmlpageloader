@@ -1,24 +1,8 @@
 # angeldav-testpackage
 This package needs express.js to work
 
-```javascript
-// loader
-new package.loader( /* config table */ ) // creates page
-    .load() // loads page
 
-{ // config table
-    "res":res, // app.get response
-    "req":req, // app.get request
-    "basetemplate":`${__dirname}/custom_template.html`, // Sets template if default tempalte was not set
-    "templatedir":`${__dirname}/index.html`, // Sets content directory html
-    "template": "<p>Hello</p>", // Custom html (optional)
-    "other": {
-        "foo":"<input type='button' value='button'>" // replaces tags like <¡foo> to the content inside this value
-    }
-}
-```
-
-nodejs app
+node.js app
 ```javascript
 const express = require('express');
 const app = express();
@@ -41,6 +25,24 @@ app.get('/', (req, res) => {
 const listener = app.listen(3000, () => {
     console.log("Your app is listening on port " + listener.address().port);
 })
+```
+
+```javascript
+// loader
+new package.loader( /* config table */ ) // creates page
+    .load() // loads page
+```
+```javascript
+{ // config table
+    "res":res, // app.get response
+    "req":req, // app.get request
+    "basetemplate":`${__dirname}/custom_template.html`, // Sets template if default tempalte was not set
+    "templatedir":`${__dirname}/index.html`, // Sets content directory html
+    "template": "<p>Hello</p>", // Custom html (optional)
+    "other": {
+        "foo":"<input type='button' value='button'>" // replaces tags like <¡foo> to the content inside this value
+    }
+}
 ```
 
 template.html
