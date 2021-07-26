@@ -8,7 +8,7 @@ class loader {
         this.custombasetemplate = configtable.custombasetemplate || "";
         this.templatedir = configtable.templatedir || "";
         this.template = configtable.template || "";
-        this.other = configtable.other || [];
+        this.other = configtable.other || {};
         this.title = configtable.title || "";
     }
 
