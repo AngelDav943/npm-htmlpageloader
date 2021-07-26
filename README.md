@@ -39,6 +39,7 @@ template.html
 </html>
 ```
 
+index.html
 ```html
 <h3><¡foo></h4>
 <p>Hello!</p>
