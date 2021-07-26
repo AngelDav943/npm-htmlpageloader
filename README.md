@@ -19,6 +19,10 @@ app.get('/', (req, res) => {
         }
     }).load()
 });
+
+const listener = app.listen(3000, () => {
+    console.log("Your app is listening on port " + listener.address().port);
+})
 ```
 
 template.html
