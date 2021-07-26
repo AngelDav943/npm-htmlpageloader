@@ -48,7 +48,7 @@ class loader {
             }
 
             htmltemplate = htmltemplate.replace(/__pagetitle/g, this.title)
-            htmltemplate = htmltemplate.replace(/__rooturl/g, websiteurl);
+            htmltemplate = htmltemplate.replace(/__rooturl/g, module.exports.url);
 
             if(!this.res.headersSent) this.res.send(htmltemplate) // send html if headers are not already sent
         }
@@ -75,7 +75,7 @@ class templater {
             template = template.replace(new RegExp(`<¡${thing[0]}>`,"g"), thing[1]);
         });
 
-        template = template.replace(/__rooturl/g, websiteurl);
+        template = template.replace(/__rooturl/g, module.exports.url);
         return template
     }
 }
