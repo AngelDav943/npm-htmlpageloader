@@ -2,7 +2,8 @@
 
 ```javascript
 // loader
-new package.loader( /* config table */ )
+new package.loader( /* config table */ ) // creates page
+    .load() // loads page
 
 { // config table
     "res":res, // app.get response
