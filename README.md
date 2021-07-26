@@ -1,5 +1,21 @@
 # angeldav-testpackage
 
+```javascript
+// loader
+new package.loader( /* config table */ )
+
+{ // config table
+    "res":res, // app.get response
+    "req":req, // app.get request
+    "basetemplate":`${__dirname}/custom_template.html`, // Sets template if default tempalte was not set
+    "templatedir":`${__dirname}/index.html`, // Sets content directory html
+    "template": "<p>Hello</p>", // Custom html (optional)
+    "other": {
+        "foo":"<input type='button' value='button'>" // replaces tags like <¡foo> to the content inside this value
+    }
+}
+```
+
 nodejs app
 ```javascript
 const express = require('express');

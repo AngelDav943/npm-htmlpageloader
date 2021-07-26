@@ -15,7 +15,7 @@ class loader {
     load() { // loads the html
         //console.log(__dirname);
         if (this.res && this.req) {
-            let dirtemplate = `${__dirname}/../view${this.templatedir}.html`
+            let dirtemplate = this.templatedir
             let other = this.other
 
             if(!fs.existsSync(dirtemplate) && !fs.existsSync(this.templatedir) && this.template == "") { // checks if page exists
