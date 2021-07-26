@@ -15,7 +15,6 @@ class loader {
     load() { // loads the html
         console.log(__dirname);
         if (this.res && this.req) {
-            this.other.push('')
             let dirtemplate = `${__dirname}/../view${this.templatedir}.html`
             let other = this.other
 
