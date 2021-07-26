@@ -8,7 +8,7 @@ const express = require('express');
 const app = express();
 const package = require('angeldav_test-package');
 
-package.templateDefault = `${__dirname}/template.html`
+package.templateDefault = `${__dirname}/template.html` // sets the base template for the pages
 
 app.get('/', (req, res) => {
     new package.loader({
@@ -25,6 +25,12 @@ app.get('/', (req, res) => {
 const listener = app.listen(3000, () => {
     console.log("Your app is listening on port " + listener.address().port);
 })
+```
+
+```javascript
+package.not_found_page:`${__dirname}/notfound.html` // Page to show when the page is not found
+package.url = "localhost:1234" // set url of the website to replace __rooturl in the html files to url
+package.templateDefault = `${__dirname}/template.html` // Base template for the pages
 ```
 
 How load package.loader
