@@ -4,7 +4,7 @@ class loader {
     constructor(configtable) { // loader constructor
         this.res = configtable.res
         this.req = configtable.req
-        this.basetemplate = configtable.basetemplate;//`${__dirname}/../assets/server/basetemplates/${configtable.basetemplate || "default.html"}`;
+        this.basetemplate = configtable.basetemplate || module.exports.templateDefault;
         this.custombasetemplate = configtable.custombasetemplate || "";
         this.templatedir = configtable.templatedir || "";
         this.template = configtable.template || "";
@@ -84,6 +84,7 @@ class templater {
 module.exports = {
     not_found_page:"",
     url: "",
+    templateDefault: "",
     loader,
     templater
 }
