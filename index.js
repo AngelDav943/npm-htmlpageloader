@@ -43,8 +43,8 @@ class loader {
             htmltemplate = htmltemplate.replace(/<¿templatesectionmain>/g, section);
             htmltemplate = htmltemplate.replace(/<¿templatesectionclass>/g, classmain);
 
-            if (other != {}) for (v in other) {
-                htmltemplate = htmltemplate.replace(new RegExp(`<¡${v}>`,"g"),other[v]);
+            if (other != {}) for (let value in other) {
+                htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),other[value]);
             }
 
             htmltemplate = htmltemplate.replace(/__pagetitle/g, this.title)
