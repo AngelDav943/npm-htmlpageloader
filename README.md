@@ -47,7 +47,7 @@ index.html
 
 404 error tags
 ```html
-    <¡errormessage>
-    <¡errorcode>
-    <¡errortitle>
+<¡errortitle> -- Displays error title example: 404: Page not found
+<¡errormessage> -- Displays error message ex: {page name} isn't a valid page
+<¡errorcode> -- Displays error code ex: 404
 ```

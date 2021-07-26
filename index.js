@@ -22,7 +22,7 @@ class loader {
                 this.res.status(404)
 				dirtemplate = module.exports.not_found_page
                 other = {
-                    "errormessage": '404: Page not found',
+                    "errortitle": '404: Page not found',
                     "errorcode": + '404',
                     "errortitle": (this.req.path.substring(1) + " isn't a valid page")
                 }
