@@ -1,5 +1,5 @@
 {
-  "name": "angeldav_test-package",
+  "name": "angeldav-testpackage",
   "version": "1.0.0",
   "description": "this is a test package",
   "main": "index.js",
