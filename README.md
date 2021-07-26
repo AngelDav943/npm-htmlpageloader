@@ -1,2 +1,5 @@
 # test
-something
+
+```javascript
+console.log("test")
+```
