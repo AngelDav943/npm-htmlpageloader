@@ -13,7 +13,7 @@ class loader {
     }
 
     load() { // loads the html
-        console.log(__dirname);
+        //console.log(__dirname);
         if (this.res && this.req) {
             let dirtemplate = `${__dirname}/../view${this.templatedir}.html`
             let other = this.other
@@ -43,8 +43,8 @@ class loader {
             htmltemplate = htmltemplate.replace(/<¿templatesectionmain>/g, section);
             htmltemplate = htmltemplate.replace(/<¿templatesectionclass>/g, classmain);
 
-            if (other != {}) for (value in other) {
-                htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),other[value]);
+            if (other != {}) for (v in other) {
+                htmltemplate = htmltemplate.replace(new RegExp(`<¡${v}>`,"g"),other[v]);
             }
 
             htmltemplate = htmltemplate.replace(/__pagetitle/g, this.title)
