@@ -27,11 +27,14 @@ const listener = app.listen(3000, () => {
 })
 ```
 
+How load package.loader
 ```javascript
 // loader
 new package.loader( /* config table */ ) // creates page
     .load() // loads page
 ```
+
+Contents of config table
 ```javascript
 { // config table
     "res":res, // app.get response
