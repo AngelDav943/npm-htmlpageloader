@@ -44,3 +44,10 @@ index.html
 <h3><¡foo></h4>
 <p>Hello!</p>
 ```
+
+404 error tags
+```html
+    <¡errormessage>
+    <¡errorcode>
+    <¡errortitle>
+```
