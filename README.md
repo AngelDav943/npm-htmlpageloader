@@ -3,29 +3,6 @@ This package needs express.js to work
 
 
 node.js app
-```javascript
-const express = require('express');
-const app = express();
-const package = require('angeldav_test-package');
-
-package.templateDefault = `${__dirname}/template.html` // sets the base template for the pages
-
-app.get('/', (req, res) => {
-    new package.loader({
-        "res":res,
-        "req":req,
-        "title":"title",
-        "templatedir":`${__dirname}/view/index.html`,
-        "other":{
-            "foo":"hello"
-        }
-    }).load()
-});
-
-const listener = app.listen(3000, () => {
-    console.log("Your app is listening on port " + listener.address().port);
-})
-```
 
 ```javascript
 package.url = "localhost:1234" // set url of the website to replace __rooturl in the html files to url
@@ -55,6 +32,30 @@ Contents of config table
         "foo":"<input type='button' value='button'>" // replaces tags like <¡foo> to the content inside this value
     }
 }
+```
+
+```javascript
+const express = require('express');
+const app = express();
+const package = require('angeldav_test-package');
+
+package.templateDefault = `${__dirname}/template.html` // sets the base template for the pages
+
+app.get('/', (req, res) => {
+    new package.loader({
+        "res":res,
+        "req":req,
+        "title":"title",
+        "templatedir":`${__dirname}/view/index.html`,
+        "other":{
+            "foo":"hello"
+        }
+    }).load()
+});
+
+const listener = app.listen(3000, () => {
+    console.log("Your app is listening on port " + listener.address().port);
+})
 ```
 
 template.html
