@@ -28,9 +28,12 @@ const listener = app.listen(3000, () => {
 ```
 
 ```javascript
-package.default.notfound:`${__dirname}/notfound.html` // Page to show when the page is not found
 package.url = "localhost:1234" // set url of the website to replace __rooturl in the html files to url
+package.default.notfound:`${__dirname}/notfound.html` // Page to show when the page is not found
 package.default.template = `${__dirname}/template.html` // Base template for the pages
+package.default.other:{
+    "foo":"<input type='button' value='button'>" // replaces tags like <¡foo> to the content inside this value in all pages
+}
 ```
 
 How load package.loader
