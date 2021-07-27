@@ -28,9 +28,9 @@ const listener = app.listen(3000, () => {
 ```
 
 ```javascript
-package.not_found_page:`${__dirname}/notfound.html` // Page to show when the page is not found
+package.default.notfound:`${__dirname}/notfound.html` // Page to show when the page is not found
 package.url = "localhost:1234" // set url of the website to replace __rooturl in the html files to url
-package.templateDefault = `${__dirname}/template.html` // Base template for the pages
+package.default.template = `${__dirname}/template.html` // Base template for the pages
 ```
 
 How load package.loader
