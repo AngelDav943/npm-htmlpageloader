@@ -4,7 +4,7 @@ class loader {
     constructor(configtable) { // loader constructor
         this.res = configtable.res
         this.req = configtable.req
-        this.basetemplate = configtable.basetemplate || module.exports.templateDefault;
+        this.basetemplate = configtable.basetemplate || module.exports.default.template;
         this.custombasetemplate = configtable.custombasetemplate || "";
         this.templatedir = configtable.templatedir || "";
         this.template = configtable.template || "";
@@ -20,7 +20,7 @@ class loader {
 
             if(!fs.existsSync(dirtemplate) && !fs.existsSync(this.templatedir) && this.template == "") { // checks if page exists
                 this.res.status(404)
-				dirtemplate = module.exports.not_found_page
+				dirtemplate = module.exports.default.notfound
                 other = {
                     "errortitle": '404: Page not found',
                     "errorcode": + '404',
@@ -43,6 +43,11 @@ class loader {
             htmltemplate = htmltemplate.replace(/<¿templatesectionmain>/g, section);
             htmltemplate = htmltemplate.replace(/<¿templatesectionclass>/g, classmain);
 
+            if (module.exports.default.other != {}) for (let value in module.exports.default.other) {
+                console.log(`${value}:  ${module.exports.default.other[value]} ;`)
+                htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),module.exports.default.other[value]);
+            }
+
             if (other != {}) for (let value in other) {
                 htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),other[value]);
             }
@@ -59,7 +64,7 @@ class templater {
     constructor(configtable) {
         this.templatedir = `${__dirname}/../assets/server/templates/${configtable.templatedir || "-NO.DIR-."}.html`;
         this.template = configtable.template || "";
-        this.other = configtable.other || [];
+        this.other = configtable.other || {};
     }
 
     load() {
@@ -70,10 +75,10 @@ class templater {
             template = this.template
         }
 
-        if (this.other.length > 0) this.other.forEach( object => {
-            let thing = object.replace(":","|/|objectSEPARATOR|/|").split("|/|objectSEPARATOR|/|");
-            template = template.replace(new RegExp(`<¡${thing[0]}>`,"g"), thing[1]);
-        });
+        if (this.other != {}) for (let value in this.other) {
+            htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),this.other[value]);
+        }
+
 
         template = template.replace(/__rooturl/g, module.exports.url);
         return template
@@ -81,9 +86,14 @@ class templater {
 }
 
 module.exports = {
-    not_found_page:"",
     url: "",
-    templateDefault: "",
+    default:{
+        template: "",
+        notfound:"",
+        other:{
+
+        }
+    },
     loader,
     templater
 }
