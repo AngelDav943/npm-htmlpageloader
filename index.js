@@ -44,7 +44,6 @@ class loader {
             htmltemplate = htmltemplate.replace(/<¿templatesectionclass>/g, classmain);
 
             if (module.exports.default.other != {}) for (let value in module.exports.default.other) {
-                console.log(`${value}:  ${module.exports.default.other[value]} ;`)
                 htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),module.exports.default.other[value]);
             }
 
@@ -78,7 +77,6 @@ class templater {
         if (this.other != {}) for (let value in this.other) {
             htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),this.other[value]);
         }
-
 
         template = template.replace(/__rooturl/g, module.exports.url);
         return template
