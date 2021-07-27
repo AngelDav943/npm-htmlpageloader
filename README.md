@@ -2,7 +2,6 @@
 This package needs express.js to work
 
 
-node.js app
 
 ```javascript
 package.url = "localhost:1234" // set url of the website to replace __rooturl in the html files to url
@@ -34,6 +33,7 @@ Contents of config table
 }
 ```
 
+node.js app
 ```javascript
 const express = require('express');
 const app = express();
