@@ -26,7 +26,6 @@ class loader {
                     "errorcode": + '404',
                     "errortitle": (this.req.path.substring(1) + " isn't a valid page")
                 }
-                console.log(this.templaterdir)
             }
 
             if (fs.existsSync(this.templatedir)) dirtemplate = this.templatedir
@@ -43,18 +42,23 @@ class loader {
             htmltemplate = htmltemplate.replace(/<¿templatesectionmain>/g, section);
             htmltemplate = htmltemplate.replace(/<¿templatesectionclass>/g, classmain);
 
-            if (module.exports.default.other != {}) for (let value in module.exports.default.other) {
-                htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),module.exports.default.other[value]);
-            }
+            new Promise(function(resolve, reject) {
+                if (module.exports.default.codeDir.replace(/ /g,"") != "") eval(module.exports.default.codeDir);
+            }).then(() => {
 
-            if (other != {}) for (let value in other) {
-                htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),other[value]);
-            }
-
-            htmltemplate = htmltemplate.replace(/__pagetitle/g, this.title)
-            htmltemplate = htmltemplate.replace(/__rooturl/g, module.exports.url);
-
-            if(!this.res.headersSent) this.res.send(htmltemplate) // send html if headers are not already sent
+                if (module.exports.default.other != {}) for (let value in module.exports.default.other) {
+                    htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),module.exports.default.other[value]);
+                }
+                
+                if (other != {}) for (let value in other) {
+                    htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),other[value]);
+                }
+                
+                htmltemplate = htmltemplate.replace(/__pagetitle/g, this.title)
+                htmltemplate = htmltemplate.replace(/__rooturl/g, module.exports.url);
+                
+                if(!this.res.headersSent) this.res.send(htmltemplate) // send html if headers are not already sent
+            })
         }
     }
 }
@@ -86,6 +90,7 @@ class templater {
 module.exports = {
     url: "",
     default:{
+        codeDir: "",
         template: "",
         notfound:"",
         other:{
