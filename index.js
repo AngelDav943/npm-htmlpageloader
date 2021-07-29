@@ -43,7 +43,7 @@ class loader {
             htmltemplate = htmltemplate.replace(/<¿templatesectionclass>/g, classmain);
 
             new Promise(function(resolve, reject) {
-                if (module.exports.default.codeDir.replace(/ /g,"") != "") eval(module.exports.default.codeDir);
+                if (fs.existsSync(module.exports.default.codeDir)) eval(fs.readFileSync(module.exports.default.codeDir).toString());
             }).then(() => {
 
                 if (module.exports.default.other != {}) for (let value in module.exports.default.other) {
