@@ -44,6 +44,7 @@ class loader {
 
             new Promise(function(resolve, reject) {
                 if (fs.existsSync(module.exports.default.codeDir)) eval(fs.readFileSync(module.exports.default.codeDir).toString());
+                resolve("");
             }).then(() => {
 
                 if (module.exports.default.other != {}) for (let value in module.exports.default.other) {
