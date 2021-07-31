@@ -24,7 +24,7 @@ class loader {
                 other = {
                     "errortitle": '404: Page not found',
                     "errorcode": + '404',
-                    "errortitle": (this.req.path.substring(1) + " isn't a valid page")
+                    "errormessage": (this.req.path.substring(1) + " isn't a valid page")
                 }
             }
 
