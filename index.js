@@ -38,14 +38,13 @@ class loader {
             let section = null;
             if (fs.existsSync(dirtemplate) && !section) section = fs.readFileSync(dirtemplate).toString()
             if (this.template && !section && !fs.existsSync(dirtemplate)) section = this.template
-
-            htmltemplate = htmltemplate.replace(/<¿templatesectionmain>/g, section);
-            htmltemplate = htmltemplate.replace(/<¿templatesectionclass>/g, classmain);
-
+            
             new Promise(function(resolve, reject) {
                 if (fs.existsSync(module.exports.default.codeDir)) eval(fs.readFileSync(module.exports.default.codeDir).toString());
                 resolve("");
             }).then(() => {
+                htmltemplate = htmltemplate.replace(/<¿templatesectionmain>/g, section);
+                htmltemplate = htmltemplate.replace(/<¿templatesectionclass>/g, classmain);
 
                 if (module.exports.default.other != {}) for (let value in module.exports.default.other) {
                     htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),module.exports.default.other[value]);
