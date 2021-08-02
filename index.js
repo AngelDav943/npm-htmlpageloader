@@ -69,7 +69,7 @@ class loader {
 
 class templater {
     constructor(configtable) {
-        this.templatedir = `${__dirname}/../assets/server/templates/${configtable.templatedir || "-NO.DIR-."}.html`;
+        this.templatedir = configtable.templatedir;
         this.template = configtable.template || "";
         this.other = configtable.other || {};
     }
