@@ -30,7 +30,7 @@ class loader {
 
             if (fs.existsSync(this.templatedir)) dirtemplate = this.templatedir
 
-            var classmain = "main dark-mode"
+            var classmain = "main"
             var htmltemplate = fs.readFileSync(this.basetemplate).toString();
             
             if (this.custombasetemplate != "") htmltemplate = this.custombasetemplate
@@ -43,7 +43,7 @@ class loader {
                 if (fs.existsSync(module.exports.default.codeDir)) eval(fs.readFileSync(module.exports.default.codeDir).toString());
                 resolve("");
             }).then(() => {
-                htmltemplate = htmltemplate.replace(/(\<html .*?\>)/g, `<html class="${classmain}">`);
+                htmltemplate = htmltemplate.replace(/(\<html .*?\>)/g, `<html class="${classmain.replace(/main/g,"")}">`);
                 htmltemplate = htmltemplate.replace(/<¿templatesectionmain>/g, section);
                 htmltemplate = htmltemplate.replace(/<¿templatesectionclass>/g, classmain);
 
