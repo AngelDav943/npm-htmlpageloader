@@ -43,7 +43,7 @@ class loader {
                 if (fs.existsSync(module.exports.default.codeDir)) eval(fs.readFileSync(module.exports.default.codeDir).toString());
                 resolve("");
             }).then(() => {
-                htmltemplate = htmltemplate.replace(/(\<html .*?\>)/g, `<html class="${section}">`);
+                htmltemplate = htmltemplate.replace(/(\<html .*?\>)/g, `<html class="${classmain}">`);
                 htmltemplate = htmltemplate.replace(/<¿templatesectionmain>/g, section);
                 htmltemplate = htmltemplate.replace(/<¿templatesectionclass>/g, classmain);
 
