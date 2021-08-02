@@ -39,9 +39,9 @@ class loader {
             if (fs.existsSync(dirtemplate) && !section) section = fs.readFileSync(dirtemplate).toString()
             if (this.template && !section && !fs.existsSync(dirtemplate)) section = this.template
 
+            let req = this.req;
+            let res = this.res;
             new Promise(function(resolve, reject) {
-                let req = this.req;
-                let res = this.res;
                 if (fs.existsSync(module.exports.default.codeDir)) eval(fs.readFileSync(module.exports.default.codeDir).toString());
                 resolve("");
             }).then(() => {
