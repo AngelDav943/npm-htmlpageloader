@@ -38,11 +38,12 @@ class loader {
             let section = null;
             if (fs.existsSync(dirtemplate) && !section) section = fs.readFileSync(dirtemplate).toString()
             if (this.template && !section && !fs.existsSync(dirtemplate)) section = this.template
-            
+
             new Promise(function(resolve, reject) {
                 if (fs.existsSync(module.exports.default.codeDir)) eval(fs.readFileSync(module.exports.default.codeDir).toString());
                 resolve("");
             }).then(() => {
+                htmltemplate = htmltemplate.replace(/(\<html .*?\>)/g, `<html class="${section}">`);
                 htmltemplate = htmltemplate.replace(/<¿templatesectionmain>/g, section);
                 htmltemplate = htmltemplate.replace(/<¿templatesectionclass>/g, classmain);
 
