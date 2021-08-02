@@ -83,7 +83,7 @@ class templater {
         }
 
         if (this.other != {}) for (let value in this.other) {
-            htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),this.other[value]);
+            template = template.replace(new RegExp(`<¡${value}>`,"g"),this.other[value]);
         }
 
         template = template.replace(/__rooturl/g, module.exports.url);
