@@ -42,8 +42,9 @@ class loader {
             let req = this.req;
             let res = this.res;
             new Promise(function(resolve, reject) {
+                let autoresolve = true
                 if (fs.existsSync(module.exports.default.codeDir)) eval(fs.readFileSync(module.exports.default.codeDir).toString());
-                resolve("");
+                if (autoresolve == true) resolve("");
             }).then(() => {
                 htmltemplate = htmltemplate.replace(/(\<html .*?\>)/g, `<html class="${classmain.replace(/main/g,"")}">`);
                 htmltemplate = htmltemplate.replace(/<¿templatesectionmain>/g, section);
