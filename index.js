@@ -59,7 +59,7 @@ class loader {
                 }
                 
                 htmltemplate = htmltemplate.replace(/__pagetitle/g, this.title)
-                htmltemplate = htmltemplate.replace(/__rooturl/g, module.exports.url || req.headers.host);
+                htmltemplate = htmltemplate.replace(/__rooturl/g, module.exports.url || `https://${req.headers.host}`);
                 
                 if(!this.res.headersSent) this.res.send(htmltemplate) // send html if headers are not already sent
             })
@@ -86,7 +86,7 @@ class templater {
             template = template.replace(new RegExp(`<¡${value}>`,"g"),this.other[value]);
         }
 
-        template = template.replace(/__rooturl/g, `https://${module.exports.url}`);
+        template = template.replace(/__rooturl/g, module.exports.url || `https://${req.headers.host}`);
         return template
     }
 }
