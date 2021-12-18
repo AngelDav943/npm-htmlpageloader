@@ -41,6 +41,8 @@ class loader {
 
             let req = this.req;
             let res = this.res;
+
+            module.exports.url = (module.exports.url || `https://${req.headers.host}`);
             new Promise(function(resolve, reject) {
                 let autoresolve = true
                 if (fs.existsSync(module.exports.default.codeDir)) eval(fs.readFileSync(module.exports.default.codeDir).toString());
@@ -86,7 +88,7 @@ class templater {
             template = template.replace(new RegExp(`<¡${value}>`,"g"),this.other[value]);
         }
 
-        template = template.replace(/__rooturl/g, module.exports.url || `https://${req.headers.host}`);
+        template = template.replace(/__rooturl/g, module.exports.url);
         return template
     }
 }
