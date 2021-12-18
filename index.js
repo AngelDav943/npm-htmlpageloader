@@ -86,7 +86,7 @@ class templater {
             template = template.replace(new RegExp(`<¡${value}>`,"g"),this.other[value]);
         }
 
-        template = template.replace(/__rooturl/g, module.exports.url);
+        template = template.replace(/__rooturl/g, `https://${module.exports.url}`);
         return template
     }
 }
