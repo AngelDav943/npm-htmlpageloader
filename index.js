@@ -89,9 +89,9 @@ class templater {
 
         if (this.other != {}) for (let value in this.other) {
             if (typeof(this.other[value]) == "object") for (let val in this.other[value]) {
-                htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}.${val}>`,"g"),this.other[value][val]);
+                template = template.replace(new RegExp(`<¡${value}.${val}>`,"g"),this.other[value][val]);
             }
-            htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),this.other[value]);
+            template = template.replace(new RegExp(`<¡${value}>`,"g"),this.other[value]);
         }
 
         template = template.replace(/__rooturl/g, module.exports.url);

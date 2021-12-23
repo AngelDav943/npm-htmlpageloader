@@ -1,6 +1,6 @@
 {
   "name": "angeldav-testpackage",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "this is a test package",
   "main": "index.js",
   "scripts": {
