@@ -57,6 +57,9 @@ class loader {
                 }
                 
                 if (other != {}) for (let value in other) {
+                    if (typeof(other[value]) == "object") for (let val in other[value]) {
+                        htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}.${val}>`,"g"),other[value][val]);
+                    }
                     htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),other[value]);
                 }
                 
