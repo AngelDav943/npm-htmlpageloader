@@ -15,9 +15,10 @@ package.default.notfound:`${__dirname}/notfound.html` // Page to show when a pag
 package.default.template = `${__dirname}/template.html` // Base template for the pages
 
 // OPTIONAL
-// replaces tags like <¡foo> to the content inside this value in all pages
+// replaces tags like <¡foo> to the html content inside this value in all pages
 package.default.other = { 
-    "foo":"<input type='button' value='button'>" 
+    "foo":"<input type='button' value='button'>" // raw html
+    "navigator":`${__dirname}/public/components/nav.html` // html directory
 }
 ```
 

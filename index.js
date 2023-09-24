@@ -53,7 +53,10 @@ class loader {
                 htmltemplate = htmltemplate.replace(/<¿templatesectionclass>/g, classmain);
 
                 if (module.exports.default.other != {}) for (let value in module.exports.default.other) {
-                    htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),module.exports.default.other[value]);
+                    let tag = module.exports.default.other[value];
+                    if (fs.existsSync(module.exports.default.other[value])) tag = fs.readFileSync(module.exports.default.other[value]);
+                    
+                    htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),tag);
                 }
                 
                 if (other != {}) for (let value in other) {
