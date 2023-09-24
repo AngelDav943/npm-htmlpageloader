@@ -6,10 +6,10 @@ class loader {
         this.req = configtable.req
         this.basetemplate = configtable.basetemplate || module.exports.default.template;
         this.custombasetemplate = configtable.custombasetemplate || "";
-        this.templatedir = configtable.templatedir || "";
-        this.template = configtable.template || "";
+        this.templatedir = configtable.templatedir || configtable.content || "";
+        this.template = configtable.template || configtable.content || "";
         this.other = configtable.other || {};
-        this.title = configtable.title || "";
+        this.title = configtable.title || module.exports.default.title;
     }
 
     load() { // loads the html
@@ -74,8 +74,8 @@ class loader {
 
 class templater {
     constructor(configtable) {
-        this.templatedir = configtable.templatedir;
-        this.template = configtable.template || "";
+        this.templatedir = configtable.templatedir || configtable.content;
+        this.template = configtable.template || configtable.content || "";
         this.other = configtable.other || {};
     }
 
@@ -102,6 +102,7 @@ class templater {
 module.exports = {
     url: undefined,
     default:{
+        title: "",
         codeDir: "",
         template: "",
         notfound:"",

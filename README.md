@@ -1,43 +1,58 @@
 # angeldav-testpackage
-This package needs express.js to work
+This package is recommended to be used with express
 
-
-
+Importing the packages
 ```javascript
-package.url = "localhost:1234" // set url of the website to replace __rooturl in the html files to url
-package.default.notfound:`${__dirname}/notfound.html` // Page to show when the page is not found
+const express = require('express');
+const app = express();
+const package = require('angeldav_test-package');
+```
+
+Initalization variables
+```javascript
+package.url = "localhost:1234" // set url of the website to replace __rooturl in the html files to the chosen url
+package.default.notfound:`${__dirname}/notfound.html` // Page to show when a page is not found
 package.default.template = `${__dirname}/template.html` // Base template for the pages
-package.default.other:{
-    "foo":"<input type='button' value='button'>" // replaces tags like <¡foo> to the content inside this value in all pages
+
+// OPTIONAL
+// replaces tags like <¡foo> to the content inside this value in all pages
+package.default.other = { 
+    "foo":"<input type='button' value='button'>" 
 }
 ```
 
-How load package.loader
+How to load the loader
 ```javascript
 // loader
 new package.loader( /* config table */ ) // creates page
     .load() // loads page
 ```
 
-Contents of config table
+Config table
 ```javascript
-{ // config table
-    "res":res, // app.get response
-    "req":req, // app.get request
-    "basetemplate":`${__dirname}/custom_template.html`, // Sets template if default tempalte was not set
-    "templatedir":`${__dirname}/index.html`, // Sets content directory html
-    "template": "<p>Hello</p>", // Custom html (optional)
+{
+    "res":res, // http response
+    "req":req, // http request
+    
+    "basetemplate":`${__dirname}/custom_template.html`, // Sets template if default template was not set or custom template is needed
+
+    "content":`${__dirname}/index.html`, // Sets content directory
+    "content": "<p>Hello</p>", // Or set html content directly
+    
     "other": {
         "foo":"<input type='button' value='button'>" // replaces tags like <¡foo> to the content inside this value
     }
+
 }
 ```
 
-node.js app
+## examples
+
+Example of ``index.js``
 ```javascript
 const express = require('express');
 const app = express();
-const package = require('angeldav_test-package');
+const package = require('angeldav_testpackage');
 
 package.templateDefault = `${__dirname}/template.html` // sets the base template for the pages
 
@@ -46,7 +61,7 @@ app.get('/', (req, res) => {
         "res":res,
         "req":req,
         "title":"title",
-        "templatedir":`${__dirname}/view/index.html`,
+        "content":`${__dirname}/view/index.html`,
         "other":{
             "foo":"hello"
         }
@@ -58,7 +73,7 @@ const listener = app.listen(3000, () => {
 })
 ```
 
-template.html
+Example of ``template.html``
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -69,22 +84,30 @@ template.html
 
     <body>
         <section class="<¿templatesectionclass>">
-            <¿templatesectionmain>
+            <¿templatesectionmain> <!-- required for loader content to show -->
         </section>
     </body>
 
 </html>
 ```
 
-index.html
+Example of ``view/index.html``
 ```html
 <h3><¡foo></h4>
 <p>Hello!</p>
 ```
+
+## tags
 
 404 error tags
 ```html
 <¡errortitle> <!-- Displays error title example: 404: Page not found -->
 <¡errormessage> <!-- Displays error message ex: {page name} isn't a valid page -->
 <¡errorcode> <!-- Displays error code ex: 404 -->
+```
+
+Other tags
+```html
+__pagetitle  <!-- Displays the title chosen in the config table -->
+__rooturl  <!-- Returns the website url stated in package.url -->
 ```
