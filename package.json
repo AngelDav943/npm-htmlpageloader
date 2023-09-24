@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/AngelDav943/test/issues"
   },
-  "homepage": "https://github.com/AngelDav943/test#readme"
+  "homepage": "https://github.com/AngelDav943/test#readme",
+  "dependencies": {
+    "fs": "^0.0.1-security"
+  }
 }
