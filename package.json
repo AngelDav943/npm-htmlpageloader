@@ -1,14 +1,14 @@
 {
-  "name": "angeldav-testpackage",
+  "name": "angeldav-loaderhtml",
   "version": "1.2.9",
-  "description": "this is a test package",
+  "description": "this is a test package for loading html templates and stuff..",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AngelDav943/test.git"
+    "url": "git+https://github.com/AngelDav943/npm-htmlpageloader.git"
   },
   "keywords": [
     "test"
@@ -16,9 +16,9 @@
   "author": "angeldav943",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AngelDav943/test/issues"
+    "url": "https://github.com/AngelDav943/npm-htmlpageloader/issues"
   },
-  "homepage": "https://github.com/AngelDav943/test#readme",
+  "homepage": "https://github.com/AngelDav943/npm-htmlpageloader#readme",
   "dependencies": {
     "fs": "^0.0.1-security"
   }

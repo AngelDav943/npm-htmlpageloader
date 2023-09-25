@@ -1,11 +1,11 @@
-# angeldav-testpackage
+# angeldav-loaderhtml
 This package is recommended to be used with express
 
 Importing the packages
 ```javascript
 const express = require('express');
 const app = express();
-const package = require('angeldav_test-package');
+const package = require('angeldav-loaderhtml');
 ```
 
 Setup
@@ -53,7 +53,7 @@ Example of ``index.js``
 ```javascript
 const express = require('express');
 const app = express();
-const package = require('angeldav_testpackage');
+const package = require('angeldav-loaderhtml');
 
 package.templateDefault = `${__dirname}/template.html` // sets the base template for the pages
 
@@ -106,7 +106,7 @@ Useful when adding logged in username, custom themes and other stuff.
 ### example usage of preload
 ``index.js``
 ```javascript 
-const package = require('angeldav_testpackage');
+const package = require('angeldav-loaderhtml');
 package.preload = `${__dirname}/default_preload.js`
 ```
 ``default_preload.js``
