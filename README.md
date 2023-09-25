@@ -8,7 +8,7 @@ const app = express();
 const package = require('angeldav_test-package');
 ```
 
-Initalization variables
+Setup
 ```javascript
 package.url = "localhost:1234" // set url of the website to replace __rooturl in the html files to the chosen url
 package.default.notfound:`${__dirname}/notfound.html` // Page to show when a page is not found
@@ -98,6 +98,31 @@ Example of ``view/index.html``
 <p>Hello!</p>
 ```
 
+## default.preload
+``package.default.preload`` sets javascript code to run before fully loading a page, it lets you modify the template page before any more changes with the ``base`` variable.
+
+Useful when adding logged in username, custom themes and other stuff.
+
+### example usage of preload
+``index.js``
+```javascript 
+const package = require('angeldav_testpackage');
+package.preload = `${__dirname}/default_preload.js`
+```
+``default_preload.js``
+```javascript 
+function getCookie(cookie, name) {
+    if (cookie.includes(name+"=") == false || name == "") return ""
+    var result = cookie.slice(cookie.indexOf(name))
+    if (result.includes(";")) result = result.slice(0, result.indexOf(";"))
+    result = result.split("=")
+    return result[result.length-1]
+}
+
+let theme = getCookie(req.headers.cookie, "theme")
+if (theme == "special") base = fs.readFileSync(`${__dirname}/../../templates/special.html`).toString()
+```
+
 ## tags
 
 404 error tags
@@ -111,4 +136,19 @@ Other tags
 ```html
 __pagetitle  <!-- Displays the title chosen in the config table -->
 __rooturl  <!-- Returns the website url stated in package.url -->
+```
+
+## page.templater example
+
+```javascript
+var numbers = ""
+
+for (let i = 0; i < 10; i++) {
+    numbers += new page.templater({
+        "content": `<p><¡content></p>`,
+        "other": {
+            content: i
+        }
+    }).load()
+}
 ```

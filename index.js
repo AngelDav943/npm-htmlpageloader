@@ -31,9 +31,9 @@ class loader {
             if (fs.existsSync(this.templatedir)) dirtemplate = this.templatedir
 
             var classmain = "main"
-            var htmltemplate = fs.readFileSync(this.basetemplate).toString();
+            var base = fs.readFileSync(this.basetemplate).toString();
             
-            if (this.custombasetemplate != "") htmltemplate = this.custombasetemplate
+            if (this.custombasetemplate != "") base = this.custombasetemplate
 
             let section = null;
             if (fs.existsSync(dirtemplate) && !section) section = fs.readFileSync(dirtemplate).toString()
@@ -44,32 +44,40 @@ class loader {
 
             module.exports.url = (module.exports.url || `https://${req.headers.host}`);
             new Promise(function(resolve, reject) {
+                let htmltemplate = undefined
                 let autoresolve = true
-                if (fs.existsSync(module.exports.default.codeDir)) eval(fs.readFileSync(module.exports.default.codeDir).toString());
+                let code_directory = module.exports.default.codeDir || module.exports.default.preload
+                try {
+                    if (fs.existsSync(code_directory)) eval(fs.readFileSync(code_directory).toString());
+                } catch (error) {
+                    console.error("ERROR AT: ", code_directory)
+                    console.error(error);
+                }
+                base = base || htmltemplate
                 if (autoresolve == true) resolve("");
             }).then(() => {
-                htmltemplate = htmltemplate.replace(/(\<html .*?\>)/g, `<html class="${classmain.replace(/main/g,"")}">`);
-                htmltemplate = htmltemplate.replace(/<¿templatesectionmain>/g, section);
-                htmltemplate = htmltemplate.replace(/<¿templatesectionclass>/g, classmain);
+                base = base.replace(/(\<html .*?\>)/g, `<html class="${classmain.replace(/main/g,"")}">`);
+                base = base.replace(/<¿templatesectionmain>/g, section);
+                base = base.replace(/<¿templatesectionclass>/g, classmain);
 
                 if (module.exports.default.other != {}) for (let value in module.exports.default.other) {
                     let tag = module.exports.default.other[value];
                     if (fs.existsSync(module.exports.default.other[value])) tag = fs.readFileSync(module.exports.default.other[value]);
                     
-                    htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),tag);
+                    base = base.replace(new RegExp(`<¡${value}>`,"g"),tag);
                 }
                 
                 if (other != {}) for (let value in other) {
                     if (typeof(other[value]) == "object") for (let val in other[value]) {
-                        htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}.${val}>`,"g"),other[value][val]);
+                        base = base.replace(new RegExp(`<¡${value}.${val}>`,"g"),other[value][val]);
                     }
-                    htmltemplate = htmltemplate.replace(new RegExp(`<¡${value}>`,"g"),other[value]);
+                    base = base.replace(new RegExp(`<¡${value}>`,"g"),other[value]);
                 }
                 
-                htmltemplate = htmltemplate.replace(/__pagetitle/g, this.title)
-                htmltemplate = htmltemplate.replace(/__rooturl/g, module.exports.url || `https://${req.headers.host}`);
+                base = base.replace(/__pagetitle/g, this.title)
+                base = base.replace(/__rooturl/g, module.exports.url || `https://${req.headers.host}`);
                 
-                if(!this.res.headersSent) this.res.send(htmltemplate) // send html if headers are not already sent
+                if(!this.res.headersSent) this.res.send(base) // send html if headers are not already sent
             })
         }
     }
@@ -106,7 +114,7 @@ module.exports = {
     url: undefined,
     default:{
         title: "",
-        codeDir: "",
+        preload: "",
         template: "",
         notfound:"",
         other:{
