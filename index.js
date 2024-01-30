@@ -61,10 +61,14 @@ class loader {
                 base = base.replace(/<¿templatesectionclass>/g, classmain);
 
                 if (module.exports.default.other != {}) for (let value in module.exports.default.other) {
-                    let tag = module.exports.default.other[value];
-                    if (fs.existsSync(module.exports.default.other[value])) tag = fs.readFileSync(module.exports.default.other[value]);
+                    let itemTag = module.exports.default.other[value];
+                    if (fs.existsSync(itemTag)) itemTag = fs.readFileSync(module.exports.default.other[value]);
+
+                    if (typeof(itemTag) == "object") for (let val in itemTag) {
+                        base = base.replace(new RegExp(`<¡${value}.${val}>`,"g"),itemTag[val]);
+                    }
                     
-                    base = base.replace(new RegExp(`<¡${value}>`,"g"),tag);
+                    base = base.replace(new RegExp(`<¡${value}>`,"g"),itemTag);
                 }
                 
                 if (other != {}) for (let value in other) {
