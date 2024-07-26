@@ -1,6 +1,6 @@
 {
   "name": "angeldav-loaderhtml",
-  "version": "1.2.10",
+  "version": "1.3.0",
   "description": "this is a test package for loading html templates and stuff..",
   "main": "index.js",
   "scripts": {
@@ -21,5 +21,6 @@
   "homepage": "https://github.com/AngelDav943/npm-htmlpageloader#readme",
   "dependencies": {
     "fs": "^0.0.1-security"
-  }
+  },
+  "devDependencies": {}
 }

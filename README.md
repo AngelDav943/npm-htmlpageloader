@@ -16,7 +16,7 @@ package.default.template = `${__dirname}/template.html` // Base template for the
 
 // OPTIONAL
 // replaces tags like <¡foo> to the html content inside this value in all pages
-package.default.other = { 
+package.default.other = {
     "foo":"<input type='button' value='button'>" // raw html
     "navigator":`${__dirname}/public/components/nav.html` // html directory
 }
@@ -34,12 +34,12 @@ Config table
 {
     "res":res, // http response
     "req":req, // http request
-    
+
     "basetemplate":`${__dirname}/custom_template.html`, // Sets template if default template was not set or custom template is needed
 
     "content":`${__dirname}/index.html`, // Sets content directory
     "content": "<p>Hello</p>", // Or set html content directly
-    
+
     "other": {
         "foo":"<input type='button' value='button'>" // replaces tags like <¡foo> to the content inside this value
     }
@@ -105,12 +105,12 @@ Useful when adding logged in username, custom themes and other stuff.
 
 ### example usage of preload
 ``index.js``
-```javascript 
+```javascript
 const package = require('angeldav-loaderhtml');
 package.preload = `${__dirname}/default_preload.js`
 ```
 ``default_preload.js``
-```javascript 
+```javascript
 function getCookie(cookie, name) {
     if (cookie.includes(name+"=") == false || name == "") return ""
     var result = cookie.slice(cookie.indexOf(name))
@@ -119,23 +119,42 @@ function getCookie(cookie, name) {
     return result[result.length-1]
 }
 
-let theme = getCookie(req.headers.cookie, "theme")
-if (theme == "special") base = fs.readFileSync(`${__dirname}/../../templates/special.html`).toString()
+module.exports = async function(req, res, data) {
+    let theme = getCookie(req.headers.cookie, "theme")
+    if (theme == "special") return {
+        base: fs.readFileSync(`${__dirname}/../templates/special.html`).toString()
+    }
+}
 ```
+### module.exports function parameters
+
+| Parameter | Description |
+| --------------- | --------------- |
+| `request` | Used for express requests |
+| `response` | Used for express responses |
+| `data` | Gives useful information to edit before the loader finishes the response |
+
+### data information
+| Parameter | Description |
+| --------------- | --------------- |
+| `htmltemplate` | A custom html template used as a base if a default is not available or defined |
+| `section` | content that's going to replace `<¿templatesectionmain>` in the template |
+| `classmain` | Content that's going to replace `<¿templatesectionclass>` in the template |
+| `other` | Table that list objects to be replaced in an item tag `<¡key>` |
+
+The data information is given as a parameter and can be returned back to be able to change it's values before the templater loads
 
 ## tags
+```html
+__pagetitle  <!-- Displays the title chosen in the config table -->
+__rooturl  <!-- Returns the website url stated in package.url -->
+```
 
 404 error tags
 ```html
 <¡errortitle> <!-- Displays error title example: 404: Page not found -->
 <¡errormessage> <!-- Displays error message ex: {page name} isn't a valid page -->
 <¡errorcode> <!-- Displays error code ex: 404 -->
-```
-
-Other tags
-```html
-__pagetitle  <!-- Displays the title chosen in the config table -->
-__rooturl  <!-- Returns the website url stated in package.url -->
 ```
 
 ## page.templater example
